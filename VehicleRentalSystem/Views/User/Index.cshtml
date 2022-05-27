@@ -1,0 +1,105 @@
+﻿@model IEnumerable<Project.Models.ViewModel.UserViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@using PagedList;
+@using PagedList.Mvc;
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+@*<link href="~/bulma-0.7.4/css/bulma.min.css" rel="stylesheet" />*@
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+<div class="container">
+    <div class="row">
+        <ol class="breadcrumb">
+            <li>
+                <a href="#">
+                    <em class="fa fa-home"></em>
+                </a>
+            </li>
+            <li class="active">Manage User</li>
+
+        </ol>
+        <p>
+
+            @Html.ActionLink("Create New", "Create", null, new { @class = "button is-primary right", Style = " position: absolute; right: 2%;" })
+
+        </p>
+    </div><!--/.row-->
+
+   
+    @if (!string.IsNullOrEmpty(ViewBag.Delete))
+    {
+        <div class="alert alert-success" role="alert">
+            @ViewBag.Delete
+        </div>
+    }
+    <table class="table is-striped is-narrow is-hoverable is-fullwidth" style="width: 100%">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.First().UserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().UserName)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.First().RoleName)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.First().FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Photo)
+            </th>
+
+            <th>
+                Action
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoleName)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    <img src="~/images/UserPhoto/@item.Photo" height="40" width="40" />
+                </td>
+
+
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.UserId }, new { @class = "button is-info" }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.UserId }, new { @class = "button is-warning" }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.UserId }, new { @class = "button is-danger" })
+
+                </td>
+            </tr>
+
+
+
+        }
+
+    </table>
+</div>

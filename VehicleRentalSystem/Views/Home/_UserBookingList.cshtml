@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Project.Models.ViewModel.BookingViewModel>
+    <link href="~/bulma-0.7.4/css/bulma.css" rel="stylesheet" />
+<div class="row">
+
+
+    <div class="col-md-12">
+
+        <table class="table table-sm table-hover table-striped">
+            <tbody>
+
+                <tr>
+
+                    <th>
+                        
+                        @Html.DisplayNameFor(model => model.SN)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.VehiclePhoto)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.PickUpDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DropOffDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TotalAmount)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AmountPaid)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.BookingStatus)
+                    </th>
+
+
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SN)
+                        </td>
+                        <td>
+                            <img src="~/images/Vehicle/@item.VehiclePhoto" height="40" width="40" />
+                        </td>
+                        <td>
+                            @Html.FormatValue("yyy-MM-dd", item.PickUpDate.Value.ToString("dddd, dd MMMM yyyy"))
+                        </td>
+                        <td>
+                            @Html.FormatValue("yyy-MM-dd", item.DropOffDate.Value.ToString("dddd, dd MMMM yyyy"))
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TotalAmount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AmountPaid)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BookingStatus)
+                        </td>
+
+
+
+
+                        <td>
+                            @if (item.BookingStatus == "Pending")
+                            {
+                                @Html.ActionLink("Cancel", "Cancel", new { id = item.BookingId }, new { @class = "button is-danger" })
+                            }
+
+                        </td>
+                    </tr>
+                }
+
+
+            </tbody>
+        </table>
+    </div>
+</div>
+

@@ -1,0 +1,66 @@
+﻿@model Project.Models.MailModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@using (Html.BeginForm("Index", "MailSender", FormMethod.Post, new { @id = "Form1", @enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
+    <div class="container">
+        @if (!string.IsNullOrEmpty(ViewBag.Message))
+        {
+        <div class="alert alert-success" role="alert">
+            @ViewBag.Message
+        </div>
+        }
+        
+        <div class="card" style="width: 90%;">
+            <div class="card-body">
+                <h3 class="card-title">Mail Model</h3>
+                <hr />
+                <fieldset>
+
+
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.To)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.To, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.To)
+                    </div>
+
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Subject)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextBoxFor(model => model.Subject, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.Subject)
+                    </div>
+                    <br />
+                    <div class="editor-field">
+                        @*<input type="file" name="fileUploader" />*@
+                        <input type="file" name="fileUploader">
+
+                    </div>
+                    <br />
+                    <div class="editor-label">
+                        @Html.LabelFor(model => model.Body)
+                    </div>
+                    <div class="editor-field">
+                        @Html.TextAreaFor(model => model.Body, new { @class = "form-control", rows = "4" })
+                        @Html.ValidationMessageFor(model => model.Body)
+                    </div>
+                    <br />
+                    <p>
+                        <input type="submit" value="Send" class="btn btn-primary" />
+                    </p>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+   
+  
+}
+
